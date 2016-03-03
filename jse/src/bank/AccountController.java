@@ -6,6 +6,8 @@ public class AccountController {
 	public static void main(String[] args) {
 		Scanner scanner = new Scanner(System.in);
 		AccountService service = new AccountServiceImpl();
+		AdminService admin = new AdminServiceImpl(100);
+		int money = 0;
 		while (true) {
 			System.out.println("=== 업무선택 === \n"
 					+ "1.계좌개설 \n"
@@ -16,11 +18,16 @@ public class AccountController {
 			switch (scanner.nextInt()) {
 			case 1:
 				System.out.println("이름 , 비번");
-				
-				System.out.println(service.open(scanner.next(), scanner.nextInt()));
+				System.out.println(admin.open(scanner.next(), scanner.nextInt()));
 				break;
-			case 2:break;
-			case 3:break;
+			case 2:
+				System.out.println("입금할 금액 :");
+				System.out.println(service.deposit(scanner.nextInt())); 
+				break;
+			case 3:
+				System.out.println("출금할 금액 :");
+				System.out.println(service.withdraw(scanner.nextInt()));
+				break;
 			case 4:break;
 			case 5:return;
 			default:

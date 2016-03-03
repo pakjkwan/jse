@@ -2,32 +2,31 @@ package bank;
 
 public class AccountServiceImpl implements AccountService{
 	AccountBean account = new AccountBean();
-	@Override
-	public String open(String name, int password) {
-		// 1. 통장개설
-		
-		account.setName(name);
-		account.setPassword(password);
-		return account.toString();
-	}
+	
 
 	@Override
 	public String deposit(int money) {
 		// 2. 입금
-		
-		return null;
+		account.setMoney(account.getMoney() + money);
+		return "잔액 : "+account.getMoney();
 	}
 
 	@Override
 	public String withdraw(int money) {
-		// 3. 출금
-		
-		return null;
+		// 3. 출금  ALT + SHIFT + M : 메소드로 추출하는 단축키
+		 return (account.getMoney() >= money) ? this.saveMoney(money): "잔액 부족";
+	}
+
+	private String saveMoney(int money) {
+		String result;
+		account.setMoney(account.getMoney() - money);
+		result = "잔액 : "+account.getMoney();
+		return result;
 	}
 
 	@Override
 	public String search() {
 		// 4. 잔액조회
-		return null;
+		return "잔액 : "+account.getMoney();
 	}
 }
